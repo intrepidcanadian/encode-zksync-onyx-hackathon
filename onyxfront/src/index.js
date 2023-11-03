@@ -7,6 +7,7 @@ import "./styles/globals.css";
 import {ZksyncEraTestnet} from "@thirdweb-dev/chains";
 
 
+
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(

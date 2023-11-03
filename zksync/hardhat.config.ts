@@ -6,7 +6,7 @@ import "@matterlabs/hardhat-zksync-verify";
 
 const config: HardhatUserConfig = {
   zksolc: {
-    version: "latest",
+    version: "1.3.14",
     settings: {},
   },
   defaultNetwork: "zkSyncTestnet",

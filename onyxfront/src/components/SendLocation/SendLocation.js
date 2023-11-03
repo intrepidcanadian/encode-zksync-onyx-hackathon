@@ -32,23 +32,35 @@ function LocationSaver() {
     }
 }, []);
 
-  useEffect(() => {
-    const getConnectedAccount = async () => {
-      if (window.ethereum) {
-        const web3 = new Web3(window.ethereum);
-        try {
-          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-          setWalletAddress(accounts[0]);
-        } catch (error) {
-          console.error("Error accessing the Ethereum account:", error);
-        }
-      } else {
-        console.error("Ethereum browser extension not detected!");
-      }
-    };
+useEffect(() => {
+  const handleAccountsChanged = (accounts) => {
+      setWalletAddress(accounts[0]);
+  };
 
-    getConnectedAccount();
-  }, []);
+  const getConnectedAccount = async () => {
+    if (window.ethereum) {
+      const web3 = new Web3(window.ethereum);
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setWalletAddress(accounts[0]);
+      } catch (error) {
+        console.error("Error accessing the Ethereum account:", error);
+      }
+
+      window.ethereum.on('accountsChanged', handleAccountsChanged);
+    } else {
+      console.error("Ethereum browser extension not detected!");
+    }
+  };
+
+  getConnectedAccount();
+  return () => {
+    if (window.ethereum) {
+      window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
+    }
+  };
+
+}, []);
 
   useEffect(() => {
     const sendDataToServer = () => {

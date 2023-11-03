@@ -53,14 +53,27 @@
         "internalType": "bool",
         "name": "consigneeSigned",
         "type": "bool"
-      },
-      {
-        "internalType": "string",
-        "name": "jwt",
-        "type": "string"
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "vcId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes",
+        "name": "holderSignature",
+        "type": "bytes"
+      }
+    ],
+    "name": "claimVC",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -89,11 +102,6 @@
         "internalType": "uint256",
         "name": "amountForGoods",
         "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "jwt",
-        "type": "string"
       }
     ],
     "name": "createDID",
@@ -150,11 +158,50 @@
         "internalType": "bool",
         "name": "consigneeSigned",
         "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "vcId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getVC",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "issuer",
+        "type": "address"
       },
       {
-        "internalType": "string",
-        "name": "jwt",
-        "type": "string"
+        "internalType": "bytes32",
+        "name": "jwtHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "holder",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "holderSignature",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bool",
+        "name": "valid",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "issuedAt",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -164,66 +211,146 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "carrier",
+        "name": "holder",
         "type": "address"
       }
     ],
-    "name": "getDIDsForCarrier",
+    "name": "getVCsForHolder",
     "outputs": [
       {
         "components": [
           {
             "internalType": "address",
-            "name": "documentID",
+            "name": "issuer",
             "type": "address"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "jwtHash",
+            "type": "bytes32"
           },
           {
             "internalType": "address",
-            "name": "carrier",
+            "name": "holder",
             "type": "address"
           },
           {
-            "internalType": "address",
-            "name": "shipper",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "consignee",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amountForCarrier",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amountForGoods",
-            "type": "uint256"
+            "internalType": "bytes",
+            "name": "holderSignature",
+            "type": "bytes"
           },
           {
             "internalType": "bool",
-            "name": "shipperSigned",
+            "name": "valid",
             "type": "bool"
           },
           {
-            "internalType": "bool",
-            "name": "consigneeSigned",
-            "type": "bool"
-          },
-          {
-            "internalType": "string",
-            "name": "jwt",
-            "type": "string"
+            "internalType": "uint256",
+            "name": "issuedAt",
+            "type": "uint256"
           }
         ],
-        "internalType": "struct EthereumDIDRegistry.DID[]",
+        "internalType": "struct EthereumDIDRegistry.VC[]",
         "name": "",
         "type": "tuple[]"
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "documentID",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "jwtHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getVcId",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "vcId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "holder",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
+      }
+    ],
+    "name": "hasHolderClaimedVC",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "holderVcs",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "documentID",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "jwtHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "issueVC",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -250,6 +377,79 @@
     "name": "signAsShipper",
     "outputs": [],
     "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "vcs",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "issuer",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "jwtHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "holder",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "holderSignature",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bool",
+        "name": "valid",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "issuedAt",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "jwtHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes",
+        "name": "holderSignature",
+        "type": "bytes"
+      },
+      {
+        "internalType": "address",
+        "name": "holderAddress",
+        "type": "address"
+      }
+    ],
+    "name": "verifyHolderSignature",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   }
 ]

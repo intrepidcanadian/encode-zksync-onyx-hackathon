@@ -3,6 +3,22 @@ let userMarker;
 let markers = [];
 let infoWindow; 
 
+let userIcon = {
+  path: google.maps.SymbolPath.CIRCLE,
+  scale: 10,
+  fillColor: "#00F",
+  fillOpacity: 1,
+  strokeWeight: 1
+}; 
+
+let walletIcon = {
+  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+  scale: 5,
+  fillColor: "#F00",
+  fillOpacity: 1,
+  strokeWeight: 1
+};
+
 function updateUserLocation() {
   if (!userMarker) return;
 
@@ -28,6 +44,8 @@ function updateUserLocation() {
   }
 }
 
+
+
 function fetchDataAndUpdateMarkers() {
   fetch("http://localhost:3002/data-endpoint")
     .then((response) => response.json())
@@ -41,6 +59,7 @@ function fetchDataAndUpdateMarkers() {
           map: map,
           position: latLng,
           title: walletAddress,
+          icon: walletIcon,  
           opacity: 1.0,
         });
 
@@ -65,19 +84,20 @@ function fetchDataAndUpdateMarkers() {
 }
 
 function initMap() {
-  const pos = { lat: 0, lng: 0 }; 
+  const pos = { lat: 43.669694, lng: -79.384963 }; 
 
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 15,
+    zoom: 18,
     center: pos,  
     mapId: "MAP_ID",
   });
 
-  userMarker = new google.maps.Marker({
-    map: map,
-    position: pos,
-    title: "Current Location",
-  });
+  // userMarker = new google.maps.Marker({
+  //   map: map,
+  //   position: pos,
+  //   title: "Current Location",
+  //   icon: userIcon, 
+  // });
 
   infoWindow = new google.maps.InfoWindow();
 

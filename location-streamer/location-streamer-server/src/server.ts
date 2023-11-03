@@ -30,18 +30,23 @@ function saveLocationToFile(walletAddress: string, lat: number, lng: number, tim
 }
 
 app.get('/data-endpoint', (req, res) => {
-  const jsonFilePath = path.join(__dirname, './data/data.json');
+  const walletAddress = req.query.walletAddress as string;
 
-  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+  fs.readFile(dataFilePath, 'utf8', (err, fileData) => {
     if (err) {
       console.error('Error reading the file:', err);
       return res.status(500).json({ error: 'Failed to read the file' });
     }
 
-    res.json(JSON.parse(data));
+    const parsedData = JSON.parse(fileData);
+
+    if (walletAddress && parsedData[walletAddress]) {
+      return res.json({ [walletAddress]: parsedData[walletAddress] });
+    }
+
+    res.json(parsedData);
   });
 });
-
 
 app.post('/save-data-endpoint', (req, res) => {
   const { walletAddress, lat, lng, timestamp } = req.body;

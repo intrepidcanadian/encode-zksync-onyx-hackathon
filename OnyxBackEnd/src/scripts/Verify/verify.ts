@@ -10,7 +10,7 @@ import {
 import fs from "fs";
 import { camelCase } from "lodash";
 import path from "path";
-import { VP, VP_DIR_PATH, ethrProvider } from "../../config";
+import { VP, VP_DIR_PATH, ethrProvider } from "../../../config";
 
 const didKey = new KeyDIDMethod();
 const didEthr = new EthrDIDMethod(ethrProvider);

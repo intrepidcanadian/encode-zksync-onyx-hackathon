@@ -5,10 +5,7 @@ import CreateContract from "./CreateContract/CreateContract";
 
 function CreateVC() {
 
-  // this is to save the userdata
   const [responseMessage, setResponseMessage] = useState(null);
-
-  // this is to save the vc
   const [vcMessage, setvcMessage] = useState(null);
 
   const [vcData, setVCData] = useState({
@@ -125,7 +122,7 @@ function CreateVC() {
         /><br /><br />
 
 
-        <button onClick={handleButtonClick}>Create a Verfiable Credential</button>
+        <button onClick={handleButtonClick}>Create a Verifiable Credential</button>
       </form>
 
       {vcMessage && (

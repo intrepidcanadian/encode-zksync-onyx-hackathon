@@ -29,7 +29,9 @@ const signVp = async () => {
     const vp = require(path.resolve(VP_DIR_PATH, VP));
     console.log(vp);
 
-    const HOLDER_ES256K_PRIVATE_KEY="0x072a3836fa0bdffff274dcf770c7b415633d7f9c4284fbda4180b86d23faf8c5"
+    // *****
+    const HOLDER_ES256K_PRIVATE_KEY="PROCESS_ENV_HOLDER_ES256K_PRIVATE_KEY"
+    // ***
 
     if (includes(vp.holder, "ethr")) {
       console.log("VP did method: did:ethr");

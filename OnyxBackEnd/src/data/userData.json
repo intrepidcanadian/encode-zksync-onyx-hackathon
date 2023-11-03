@@ -1,8 +1,8 @@
 {
-  "Shipper": "Mersk",
-  "Carrier": "Tony",
-  "Consignee": "Elaine",
+  "Shipper": "Ship",
+  "Carrier": "carrier",
+  "Consignee": "consign",
   "Product": "Herbs",
-  "Quantity": "10",
-  "Weight": "40"
+  "Quantity": "1",
+  "Weight": "12"
 }
